@@ -66,11 +66,7 @@ jupyter notebook
 
 and we choose our  Python (NLP) notebook.
 
-
-
-
-
-Step 2. Creation of the environment
+## Step 2. Load libraries
 
 ```python
 #importing necessary libraries
@@ -124,15 +120,6 @@ df.head()
     }
 
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
 
 <table border="1" class="dataframe">
   <thead>
@@ -237,24 +224,6 @@ df.describe()
 
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -349,24 +318,6 @@ df.head()
 
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -404,7 +355,7 @@ df.head()
   </tbody>
 </table>
 
-</div>
+
 
 
 
@@ -422,24 +373,6 @@ df.head()
 ```
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
 
 <table border="1" class="dataframe">
   <thead>
@@ -503,22 +436,6 @@ df['length']=df['text'].apply(lambda x: len(x))
 sns.distplot(df['length'], kde=True)
 ```
 
-    C:\Users\rusla\AppData\Local\Temp\ipykernel_31156\56211616.py:1: UserWarning: 
-    
-    `distplot` is a deprecated function and will be removed in seaborn v0.14.0.
-    
-    Please adapt your code to use either `displot` (a figure-level function with
-    similar flexibility) or `histplot` (an axes-level function for histograms).
-    
-    For a guide to updating your code to use the new functions, please see
-    https://gist.github.com/mwaskom/de44147ed2974457ad6372750bbe5751
-    
-      sns.distplot(df['length'], kde=True)
-
-
-
-
-
     <AxesSubplot: xlabel='length', ylabel='Density'>
 
 
@@ -537,11 +454,6 @@ sns.boxplot(y='length', x='label', data=df)
 
 
 
-    <AxesSubplot: xlabel='label', ylabel='length'>
-
-
-
-
 ​    
 ![png](assets/images/posts/README/nlp_14_1.png)
 ​    
@@ -553,24 +465,6 @@ df.head()
 ```
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
 
 <table border="1" class="dataframe">
   <thead>
@@ -631,15 +525,7 @@ import re
 nltk.download('punkt')
 ```
 
-    [nltk_data] Downloading package punkt to
-    [nltk_data]     C:\Users\rusla\AppData\Roaming\nltk_data...
-    [nltk_data]   Package punkt is already up-to-date!
 
-
-
-
-
-    True
 
 
 
@@ -651,15 +537,6 @@ We download the English stop words so that the model can identify the stop words
 nltk.download('stopwords')
 nltk.download('omw-1.4')
 ```
-
-    [nltk_data] Downloading package stopwords to
-    [nltk_data]     C:\Users\rusla\AppData\Roaming\nltk_data...
-    [nltk_data]   Package stopwords is already up-to-date!
-    [nltk_data] Downloading package omw-1.4 to
-    [nltk_data]     C:\Users\rusla\AppData\Roaming\nltk_data...
-    [nltk_data]   Package omw-1.4 is already up-to-date!
-
-
 
 
 
@@ -747,22 +624,6 @@ df.head()
 ```
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
 
 </style>
 
@@ -862,13 +723,6 @@ df.head()
     }
 
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
 
 </style>
 
@@ -1281,24 +1135,6 @@ over_models.sort_values(by='Accuracy_score', ascending=False)
 
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1424,24 +1260,6 @@ under_models.sort_values(by='Accuracy_score', ascending=False)
 
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1473,8 +1291,6 @@ under_models.sort_values(by='Accuracy_score', ascending=False)
     </tr>
   </tbody>
 </table>
-
-</div>
 
 
 
@@ -1628,24 +1444,6 @@ models.sort_values(by='Accuracy_score', ascending=False)
 
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1678,7 +1476,7 @@ models.sort_values(by='Accuracy_score', ascending=False)
   </tbody>
 </table>
 
-</div>
+
 
 
 
@@ -1741,9 +1539,7 @@ run_model_sampling(X,y,mlmodel,sampling)
     avg / total       0.97      0.97      0.82      0.97      0.89      0.80      1672
 
 
-​    
-
-
+   
 
 
     0.9736842105263158
