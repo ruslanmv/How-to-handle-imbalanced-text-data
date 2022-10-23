@@ -104,20 +104,13 @@ from sklearn.svm import SVC
 from sklearn.metrics import classification_report, confusion_matrix
 ```
 
+## Step 3.  Data analysis
+
 
 ```python
 df=pd.read_csv('spam.csv',encoding = 'latin-1')
 df.head()
 ```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
 
 
@@ -176,7 +169,7 @@ df.head()
   </tbody>
 </table>
 
-</div>
+
 
 
 
@@ -454,17 +447,12 @@ sns.boxplot(y='length', x='label', data=df)
 
 
 
-​    
 ![png](assets/images/posts/README/nlp_14_1.png)
-​    
-
-
+    
 
 ```python
 df.head()
 ```
-
-
 
 <table border="1" class="dataframe">
   <thead>
@@ -509,11 +497,9 @@ df.head()
   </tbody>
 </table>
 
-</div>
 
 
-
-## Data Preprocessing
+## Step 4.  Data Preprocessing
 
 NLTK has smaller sub-libraries that perform specific text cleaning tasks. These smaller libraries also have methods for text cleaning.
 
@@ -525,10 +511,6 @@ import re
 nltk.download('punkt')
 ```
 
-
-
-
-
 Downloading stop words
 We download the English stop words so that the model can identify the stop words in the texts and remove them.
 
@@ -537,12 +519,6 @@ We download the English stop words so that the model can identify the stop words
 nltk.download('stopwords')
 nltk.download('omw-1.4')
 ```
-
-
-
-    True
-
-
 
 We will use it to remove all the stop words in the dataset. We will then create custom functions for text cleaning and pass in the imported methods as parameters. To implement the custom functions, we will require Python regular expression (RegEx) module.
 
@@ -623,10 +599,6 @@ df['length_after_cleaning'] = df['text_clean'].apply(lambda x: len(x))
 df.head()
 ```
 
-
-
-</style>
-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -682,134 +654,9 @@ df.head()
   </tbody>
 </table>
 
-</div>
 
 
 
-
-```python
-def get_corpus(df):
-    corpus = []
-    ps = PorterStemmer()
-    for i in range(len(df)):
-        msg = re.sub('[^a-zA-Z]', ' ', df['text'][i]) #removing non alphabetics
-        msg = msg.lower()#lowering the case
-        msg = msg.split()
-        msg = [ps.stem(word) for word in msg if not word in stopwords.words('english')] # Stemming & Stopwords Removal
-        msg = ' '.join(msg)
-        corpus.append(msg)
-    return corpus
-```
-
-
-```python
-corpus=get_corpus(df)
-```
-
-
-```python
-#adding new column
-df['corpus'] = corpus
-df.head()
-```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-
-
-</style>
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>label</th>
-      <th>text</th>
-      <th>length</th>
-      <th>text_clean</th>
-      <th>length_after_cleaning</th>
-      <th>corpus</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>ham</td>
-      <td>Go until jurong point, crazy.. Available only ...</td>
-      <td>111</td>
-      <td>go jurong point crazy available bugis great wo...</td>
-      <td>78</td>
-      <td>go jurong point crazi avail bugi n great world...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>ham</td>
-      <td>Ok lar... Joking wif u oni...</td>
-      <td>29</td>
-      <td>ok lar joking wif oni</td>
-      <td>21</td>
-      <td>ok lar joke wif u oni</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>spam</td>
-      <td>Free entry in 2 a wkly comp to win FA Cup fina...</td>
-      <td>155</td>
-      <td>free entry wkly comp win fa cup final tkts st ...</td>
-      <td>101</td>
-      <td>free entri wkli comp win fa cup final tkt st m...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>ham</td>
-      <td>U dun say so early hor... U c already then say...</td>
-      <td>49</td>
-      <td>u dun say early hor c already say</td>
-      <td>33</td>
-      <td>u dun say earli hor u c alreadi say</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>ham</td>
-      <td>Nah I don't think he goes to usf, he lives aro...</td>
-      <td>61</td>
-      <td>nah dont think go usf life around though</td>
-      <td>40</td>
-      <td>nah think goe usf live around though</td>
-    </tr>
-  </tbody>
-</table>
-
-</div>
-
-
-
-
-```python
-wordcloud =False
-if wordcloud:
-    plt.figure(figsize = (24, 6))
-    wc = WordCloud(min_font_size = 10, background_color = 'lightblue')
-    spam_wc = wc.generate(df[df['label'] == 'spam']['corpus'].str.cat(sep = " "))
-    plt.xticks([])
-    plt.yticks([])
-    plt.imshow(spam_wc)
-    
-    plt.figure(figsize = (24, 6))
-    wc = WordCloud(min_font_size = 10, background_color = 'lightblue')
-    ham_wc = wc.generate(df[df['label'] == 'ham']['corpus'].str.cat(sep = " "))
-    plt.xticks([])
-    plt.yticks([])
-    plt.imshow(ham_wc);
-
-```
 
 
 ```python
@@ -822,7 +669,7 @@ label_map = {
 df['label'] = df['label'].map(label_map)
 ```
 
-## Implementing text vectorization
+## Step 5. Implementing text vectorization
 
 It converts the raw text into a format the NLP model can understand and use. Vectorization will create a numerical representation of the text strings called a sparse matrix or word vectors. The model works with numbers and not raw text. We will use TfidfVectorizer to create the sparse matrix.
 
@@ -893,11 +740,6 @@ Counter(y_train)
 vectorizer = TfidfVectorizer()
 vectorizer.fit(X_train)
 ```
-
-
-
-
-<style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>TfidfVectorizer()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">TfidfVectorizer</label><div class="sk-toggleable__content"><pre>TfidfVectorizer()</pre></div></div></div></div></div>
 
 
 
@@ -978,7 +820,7 @@ print(accuracy_score(y_test, y_preds))
 
 Actually NLP is one of the most common areas in which resampling of data is needed as there are many text classification tasks dealing with imbalanced problem (think of spam filtering, insulting comment detection, article classification, etc.
 
-# Oversampling
+# Step 6. Oversampling
 
 
 ```python
@@ -1187,7 +1029,7 @@ over_models.sort_values(by='Accuracy_score', ascending=False)
 ​    
 
 
-# Downsampling
+# Step 7.  Downsampling
 
 
 ```python
@@ -1300,7 +1142,7 @@ under_models.sort_values(by='Accuracy_score', ascending=False)
 ​    
 
 
-# Pipeline
+# Step 8.  DownsamplingPipeline
 
 TF-IDF - normalizing and weighting with diminishing importance tokens that occur in the majority of documents.
 
@@ -1486,7 +1328,7 @@ models.sort_values(by='Accuracy_score', ascending=False)
 ​    
 
 
-# Final model
+# Step 9 Final model
 
 
 ```python
