@@ -6,6 +6,22 @@ I will analyze the **Spam Detection using NLP**.
 
 This example is helpful to show how to deal this type of problems for your custom NLP problems.
 
+## What is Imbalanced Data?
+
+Imbalanced data typically refers to a problem with classification problems where the classes are not represented equally.
+
+There different performance measures that can give more insight into the accuracy of the model than traditional classification accuracy:
+
+- **Confusion Matrix**: A breakdown of predictions into a table showing correct predictions (the diagonal) and the types of incorrect predictions made (what classes incorrect predictions were assigned).
+- **Precision**: A measure of a classifiers exactness.
+- **Recall**: A measure of a classifiers completeness
+- **F1 Score (or F-score)**: A weighted average of precision and recall.
+
+I would also advice you to take a look at the following:
+
+- **Kappa (or [Cohen’s kappa](https://en.wikipedia.org/wiki/Cohen's_kappa))**: Classification accuracy normalized by the imbalance of the classes in the data.
+- **ROC Curves**: Like precision and recall, accuracy is divided into sensitivity and specificity and models can be chosen based on the balance thresholds of these values.
+
 ## Step 1. Creation of the environment
 
 I will create an environment called **nlp**, because I am interested in  the **Natural Language Processing** (NLP) . 
@@ -52,21 +68,9 @@ and we choose our  Python (NLP) notebook.
 
 
 
-## What is Imbalanced Data?
 
-Imbalanced data typically refers to a problem with classification problems where the classes are not represented equally.
 
-There different performance measures that can give more insight into the accuracy of the model than traditional classification accuracy:
-
-- **Confusion Matrix**: A breakdown of predictions into a table showing correct predictions (the diagonal) and the types of incorrect predictions made (what classes incorrect predictions were assigned).
-- **Precision**: A measure of a classifiers exactness.
-- **Recall**: A measure of a classifiers completeness
-- **F1 Score (or F-score)**: A weighted average of precision and recall.
-
-I would also advice you to take a look at the following:
-
-- **Kappa (or [Cohen’s kappa](https://en.wikipedia.org/wiki/Cohen's_kappa))**: Classification accuracy normalized by the imbalance of the classes in the data.
-- **ROC Curves**: Like precision and recall, accuracy is divided into sensitivity and specificity and models can be chosen based on the balance thresholds of these values.
+Step 2. Creation of the environment
 
 ```python
 #importing necessary libraries
